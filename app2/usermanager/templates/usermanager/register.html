@@ -1,11 +1,19 @@
 {% extends 'blogs/parent.html' %}
 {% load crispy_forms_tags %}
 {% block contents %}
-<form method="post" class="w-50 mx-auto bg-dark text-light">
-    <legend style="margin-left:20px ;">Registration Details</legend>
-    {% csrf_token %}
-    <div style="margin-left: 10px;">{{ userform|crispy }}</div> <br><br>
-    <button class="btn btn-primary">Register</button>
-</form>
-<p><small>Already hava an account?<a href="{% url 'login' %}">Login</a></small></p>
+<div class="col-11 col-md-8 col-lg-6 mx-auto">
+    <form method="post" class="bg-dark text-light p-4 rounded shadow">
+        <legend class="border-bottom border-secondary pb-2 mb-4">Registration Details</legend>
+        {% csrf_token %}
+        <div class="px-2">
+            {{ userform|crispy }}
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-primary btn-block">Register</button>
+        </div>
+    </form>
+    <p class="mt-3 text-center">
+        <small>Already have an account? <a href="{% url 'login' %}" class="text-primary">Login</a></small>
+    </p>
+</div>
 {% endblock %}

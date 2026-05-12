@@ -1,10 +1,16 @@
 {% extends 'blogs/parent.html' %}
 {% load crispy_forms_tags %}
 {% block contents %}
-<form method="post" enctype="multipart/form-data" class="w-50 mx-auto bg-dark text-light ">
-    {% csrf_token %}
-    <legend>Update Post details</legend>
-   <div class="ml-5"> {{ editform|crispy }}<br> </div>
-    <button class="btn btn-outline-warning btn-sm">Update</button><br><br>
-</form>
+<div class="col-11 col-md-8 col-lg-6 mx-auto">
+    <form method="post" enctype="multipart/form-data" class="bg-dark text-light p-4 rounded shadow">
+        {% csrf_token %}
+        <legend class="border-bottom pb-2 mb-4">Update Post details</legend>
+        <div class="px-2"> 
+            {{ editform|crispy }}
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-outline-warning btn-block">Update Post</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
