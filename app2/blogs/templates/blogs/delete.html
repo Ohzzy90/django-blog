@@ -1,0 +1,11 @@
+{% extends 'blogs/parent.html' %}
+{% load crispy_forms_tags %}
+{% block contents %}
+<form method="post">
+    {% csrf_token %}
+    <legend>Delete Post</legend>
+    <p>Are you sure you want to delete post?</p>
+    <button class="btn btn-danger btn-sum mr-3">Delete Post</button>
+    <a href="{% url 'details' pid %}" class="btn btn-secondary btn-sum mr-3">Cancel</a>
+</form>
+{% endblock %}

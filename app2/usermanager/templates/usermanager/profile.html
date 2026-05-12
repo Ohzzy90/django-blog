@@ -1,0 +1,20 @@
+{% extends 'blogs/parent.html' %}
+{% load crispy_forms_tags %}
+{% block contents %}
+<div class="mx-auto ps-4 w-50 bg-dark text-light">
+    <img src="{{user.profilemodel.profile_pic.url}}" alt="" width="120" height="125">
+    <p>{{user.profilemodel.bio}}</p>
+    <form method="post" enctype="multipart/form-data" class="w-50 mx-auto">
+        <fieldset>
+            <legend>Profile Info</legend>
+            {% csrf_token %}
+            {{ euform|crispy }}
+            {{ pform | crispy}}
+        </fieldset>
+        <br>
+        <button class="btn btn-info">Update profile</button>
+    </form>
+</div>
+
+{% endblock %}
+

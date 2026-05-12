@@ -1,0 +1,12 @@
+{% load crispy_forms_tags %}
+{% block contents %}
+<div class="offset-md-3 col-md-6">
+    <form method="POST">
+        {% csrf_token %}
+        <legend>Leave a comment</legend>
+        {{ lk |crispy }} <br>
+        <button class="btn btn-success">like</button><br>
+    </form>
+</div>
+
+{% endblock %}
