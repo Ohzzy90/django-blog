@@ -2,18 +2,23 @@
 {% block contents %}
 {% load crispy_forms_tags %}
 {% load static %}
-<form method="post" enctype="multipart/form-data" class="w-50 mx-auto">
-    <legend>Make a new post </legend>
-    {% csrf_token %}
-    <div class="bg-dark text-light">{{New_post|crispy}}</div>
-    <button class="btn btn-outline-primary">Make a post </button>
-</form>
+
+<div class="col-11 col-md-8 col-lg-6 mx-auto">
+    <form method="post" enctype="multipart/form-data">
+        <legend class="mb-4">Make a new post</legend>
+        {% csrf_token %}
+        <div class="bg-dark text-light p-3 rounded mb-3">
+            {{New_post|crispy}}
+        </div>
+        <button class="btn btn-outline-primary btn-block btn-md-inline">Make a post</button>
+    </form>
+</div>
+
 <script>
     var blogauthor="{{request.user}}"
-    document.getElementById("ba").value=blogauthor
+    var authorField = document.getElementById("ba");
+    if (authorField) {
+        authorField.value = blogauthor;
+    }
 </script>    
 {% endblock %}
-<script src="{% static 'blogs/js/jquery.js' %}"></script>
-<script src="{% static 'blogs/js/bootstrap.min.js' %}"></script>
-</body>
-</html>
