@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Demo</title>
+    <link rel="stylesheet" href="{% static 'blogs/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blogs/font-awesome-master/css/font-awesome.min.css' %}">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a href="{% url 'Home' %}" class="navbar-brand d-flex align-items-center">
+                <img src="{% static 'blogs/pixs/220px-Doctor_Strange_in_the_Multiverse_of_Madness_soundtrack_cover_SOio09Z.jpg' %}" alt="" height="40" width="40" class="rounded-circle mr-2">
+                <span class="h4 mb-0">Blogger</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menus">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menus">
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a href="{% url 'Home' %}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="{% url 'addpost' %}" class="nav-link">Add Post</a></li>
+                        <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+                        <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link text-warning">{{user.username}} (Logout)</a></li>
+                    {% else %}
+                        <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                        <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid mb-4" style="background-position: center; height: 30vh; background-size: cover; background-repeat: no-repeat; background-image:url('/media/uploads/Morales.jpg')">
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-9 col-md-8 col-sm-12">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show col-11 col-md-10 mx-auto">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% block contents %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12 mt-5 mt-md-0">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-dark text-light">
+                        <h5 class="mb-0">Latest News</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Queen goes home</li>
+                        <li class="list-group-item">Prince becomes king</li>
+                        <li class="list-group-item">Asuu extends strike</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'blogs/js/jquery.js' %}"></script>
+    <script src="{% static 'blogs/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

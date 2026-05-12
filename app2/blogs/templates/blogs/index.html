@@ -1,0 +1,37 @@
+{% extends 'blogs/parent.html' %}
+{% block contents %}
+
+{% for blog in page_view %}
+<div class="card col-11 col-md-8 mx-auto mb-4 p-3 bg-dark text-light border-secondary">
+    <div class="card-body p-0">
+        <h2 class="card-title">
+            {{blog.blogtitle}} 
+            {% if blog.picture %}
+            <img src="{{ blog.picture.url }}" class="float-right rounded-circle d-none d-sm-block" style="width: 60px; height: 60px; object-fit: cover;" alt="">
+            {% endif %}
+        </h2>
+        <p class="card-text"><small class="text-muted">{{blog.blogauthor}} — {{blog.postdate}}</small></p>
+        <p class="lead" style="font-size: 1.1rem;">
+            {{blog.blogcontent|truncatechars:100}}
+        </p>
+        <div class="text-right mt-3">
+            <a href="{% url 'details' blog.id %}" class="btn btn-outline-primary btn-sm">View More</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="d-flex justify-content-center my-4">
+    <ul class="pagination">
+        {% if page_view.has_previous %}
+        <li class="page-item"><a href="?page=1" class="page-link">First</a></li>
+        <li class="page-item"><a href="?page={{page_view.previous_page_number}}" class="page-link">Previous</a></li>
+        {% endif %}
+        <li class="page-item"><a href="#" class="page-link disabled">{{page_view.number}} of {{page_view.paginator.num_pages}}</a></li>
+        {% if page_view.has_next %}
+        <li class="page-item"><a href="?page={{page_view.next_page_number}}" class="page-link">Next</a></li>
+        <li class="page-item"><a href="?page={{page_view.paginator.num_pages}}" class="page-link" >Last</a></li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}

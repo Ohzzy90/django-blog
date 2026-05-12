@@ -1,0 +1,47 @@
+{% extends "blogs/parent.html" %}
+{% block contents %}
+<div class="card col-11 col-md-10 col-lg-8 mx-auto shadow-sm mb-4">
+    <img src="{{ postinfo.picture.url}}" class="card-img-top" style="max-height: 400px; object-fit: cover;">
+    <div class="card-body">
+        <h2 class="card-title">{{postinfo.blogtitle}}</h2>
+        <h6 class="text-muted mb-3">{{postinfo.blogauthor}} — {{postinfo.postdate}}</h6>
+        <p class="lead">{{postinfo.blogcontent}}</p>
+    </div>
+    <div class="card-footer d-flex flex-wrap">
+        {% if user.username == postinfo.blogauthor %}
+            <a href="#" class="btn btn-primary btn-sm mr-2 mb-2">Like</a>
+            <a href="{% url 'comment' postinfo.id %}" class="btn btn-primary btn-sm mr-2 mb-2">Comment</a>
+            <a href="#" class="btn btn-primary btn-sm mr-2 mb-2">Share</a>
+            <a href="{% url 'edit' postinfo.id %}" class="btn btn-warning btn-sm mr-2 mb-2 text-dark">Edit</a>
+            <a href="{% url 'delete' postinfo.id %}" class="btn btn-danger btn-sm mb-2">Delete</a>
+        {% else %}
+            <a href="#" class="btn btn-primary btn-sm mr-2 mb-2">Like</a>
+            <a href="{% url 'comment' postinfo.id %}" class="btn btn-primary btn-sm mr-2 mb-2">Comment</a>
+            <a href="#" class="btn btn-primary btn-sm mb-2">Share</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="col-11 col-md-10 col-lg-8 mx-auto p-0">
+    <h3 class="border-bottom pb-2 mb-3">Comments ({{no_comment}})</h3>
+    {% if not postinfo.comments.all %}
+        <p class="lead text-center py-4">Be the first to comment</p>
+    {% else %}
+        {% for comment in postinfo.comments.all %}
+            <div class="card shadow-sm mb-3">
+                <div class="card-header bg-white">
+                    <h6 class="mb-0 font-weight-bold">
+                        {{comment.author}} <span class="text-muted small ml-2">{{comment.comment_time|timesince}} ago</span>
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{comment.content}}</p>
+                </div>
+                <div class="card-footer bg-white text-right">
+                    <a href="{% url 'del' comment.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

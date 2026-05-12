@@ -1,0 +1,10 @@
+{% extends 'blogs/parent.html' %}
+{% load crispy_forms_tags %}
+{% block contents %}
+<form method="post" enctype="multipart/form-data" class="w-50 mx-auto bg-dark text-light ">
+    {% csrf_token %}
+    <legend>Update Post details</legend>
+   <div class="ml-5"> {{ editform|crispy }}<br> </div>
+    <button class="btn btn-outline-warning btn-sm">Update</button><br><br>
+</form>
+{% endblock %}

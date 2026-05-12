@@ -1,0 +1,11 @@
+{% extends 'blogs/parent.html' %}
+{% load crispy_forms_tags %}
+{% block contents %}
+<form method="post" class="w-50 mx-auto bg-dark text-light">
+    <legend style="margin-left:20px ;">Registration Details</legend>
+    {% csrf_token %}
+    <div style="margin-left: 10px;">{{ userform|crispy }}</div> <br><br>
+    <button class="btn btn-primary">Register</button>
+</form>
+<p><small>Already hava an account?<a href="{% url 'login' %}">Login</a></small></p>
+{% endblock %}

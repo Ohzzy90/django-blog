@@ -1,0 +1,13 @@
+{% extends 'blogs/parent.html' %}
+{% load crispy_forms_tags %}
+{% block contents %}
+<form method="post" class="w-75 mx-auto">
+    {% csrf_token %}
+    <legend>Sign In Details</legend>
+    {{loginform|crispy }}
+    <br>
+    <button class="btn btn-success btn-sm">Login</button>
+    <p>Don't have an account?<a href="{% url 'register' %}">Sign up</a></p>
+</form>
+{% endblock %}
+
